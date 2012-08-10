@@ -4,7 +4,6 @@ JamTemplate
 A "HTML5 Game Template" for Game Jam
 
 
-
 ## 什么是"HTML Game Template"?
 JamTemplate 是一个用于 HTML5 game 开发的模板.
 它不是引擎, 不是框架, 也算不上是类库.
@@ -39,7 +38,6 @@ JamTemplate 是一个用于 HTML5 game 开发的模板.
 **这些东西就是目前大家看到的这个JamTemplate**
 
 
-
 ## 适用场景
 JamTemplate 只提供了一个最基本的HTML5游戏骨架.
 它不会在游戏的整个开发过程中提升开发效率, 它只是在一些基本的环节上(例如资源加载 游戏dom初始化 游戏主循环管理 时间管理 简单的Animation 等等)帮助开发人员做一些事情.
@@ -54,6 +52,10 @@ JamTemplate 只提供了一个最基本的HTML5游戏骨架.
 
 
 .
+
+
+.
+
 
 
 
