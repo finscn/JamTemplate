@@ -1,0 +1,86 @@
+
+* {
+    -webkit-text-size-adjust:none;
+}
+
+html,body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0px ;
+    width:100%;
+    height:100%;
+}
+
+body {
+    text-align:center;
+    cursor:default;
+
+    display:-webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-align: center;
+ 
+     display:-moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-orient: horizontal;
+    -moz-box-align: center;
+
+    display:-ms-box;
+    -ms-box-orient: horizontal;
+    -ms-box-pack: center;
+    -ms-box-orient: horizontal;
+    -ms-box-align: center;
+
+    display:-o-box;
+    -o-box-orient: horizontal;
+    -o-box-pack: center;
+    -o-box-orient: horizontal;
+    -o-box-align: center;
+
+    display:box;
+    box-orient: horizontal;
+    box-pack: center;
+    box-orient: horizontal;
+    box-align: center;
+
+}
+
+
+body, div {
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+}
+
+
+canvas {
+	-webkit-transform: translateZ(0px);
+	-moz-transform: translateZ(0px);
+	-ms-transform: translateZ(0px);
+	-o-transform: translateZ(0px);
+	transform: translateZ(0px);
+
+	/*image-rendering: auto | optimizeSpeed | optimizeQuality | -webkit-optimize-contrast*/
+	-webkit-image-rendering:  optimizeSpeed;
+	-moz-image-rendering:  optimizeSpeed;
+	-ms-image-rendering:  optimizeSpeed;
+	-o-image-rendering:  optimizeSpeed;
+	image-rendering:  optimizeSpeed;
+	
+}
+
+.game-container {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif, "雅黑", "黑体", "宋体" ;
+    position : relative;
+    overflow : hidden;
+}
+
+.game-ui-pool {
+    position: relative;
+    visibility: hidden;
+    overflow : hidden;
+    width : 0px;
+    height : 0px;
+}

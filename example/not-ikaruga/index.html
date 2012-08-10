@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+<title>This is not ikaruga</title>
+
+
+<link rel="stylesheet" href="../../lib/style.css" >
+<script src="../../lib/Base.js"></script>
+<script src="../../lib/Event.js"></script>
+<script src="../../lib/Timer.js"></script>
+<script src="../../lib/ResourcePool.js"></script>
+<script src="../../lib/ProcessQ.js"></script>
+<script src="../../lib/Animation.js"></script>
+<script src="../../lib/Game.js"></script>
+<script src="../../lib/EntityTemplate.js"></script>
+
+
+<link rel="stylesheet" href="./main.css" >
+<script src="./js/player.js"></script>
+<script src="./js/enemy.js"></script>
+<script src="./js/scene.js"></script>
+<script src="./main.js"></script>
+
+
+<script>
+
+
+</script>
+<style type="text/css">
+
+
+</style>
+</head>
+
+<body >
+
+
+<div id="container" class="game-container">
+
+
+</div>
+
+<div id="ui-pool" class="game-ui-pool">
+	<div id="main-menu">
+		<div id="title">This is NOT IKARUGA</div>
+		<hr>
+		<div>W/A/S/D to Move<br>SPACE to Change your color</div><br>
+		<div>R to restart</div><br>
+		<div>the bullet can't hit you,<br>if your color is <em>NOT</em> same to its.</div>
+		<a href="javascript:game.play();">Play</a>
+	</div>
+	<div id="game-over">
+		<div>Game Over</div>
+		<hr>
+		<div>Your Score : <span id="scroe">0</span>s</div>
+		<a href="javascript:game.restart();">Try Again</a>
+		<a href="javascript:game.exit();">Exit</a>
+	</div>
+</div>
+
+</body>
+
+</html>
+
+
