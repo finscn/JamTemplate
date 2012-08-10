@@ -1,6 +1,6 @@
 	
 function createEnemies(scene){
-	var enemyCount=50;
+	var enemyCount=60;
 	var enemies=[];
 	for (var i=0;i<enemyCount;i++){
 		var enemy={
