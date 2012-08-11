@@ -23,6 +23,9 @@ var game=new Game({
 	exit : function(){
 		window.location.reload();
 	},
+	play : function(){
+		this.start();		
+	},
 	getSceneInstance : function(index){
 		var scene=createScene(index);
 		return scene;
