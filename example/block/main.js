@@ -1,18 +1,21 @@
 
 var game=new Game({
 	container : "container",
-	width : 800,
+	width : 768,
 	height : 480,
 	uiPool : "ui-pool",
+	resources : [
+	],
 	initEvent : function(){
-		recordKeyState(null,function(){
-				if (event.keyCode==Key.R){
-					game.restart();
-				}
-			});
+		recordKeyState(null,function(event){
+			if (event.keyCode==Key.R){
+				game.restart();
+			}
+		});
 	},
 	onReady : function(){
-		this.showUI("main-menu");
+		// this.showUI("main-menu");
+		this.play();
 	},
 	exit : function(){
 		window.location.reload();
@@ -23,10 +26,6 @@ var game=new Game({
 	getSceneInstance : function(index){
 		var scene=createScene(index);
 		return scene;
-	},
-	clear : function(){
-		this.context.fillStyle="rgba(255,255,255,0.4)";
-		this.context.fillRect(0,0,this.viewWidth,this.viewHeight);
 	}
 
 });
