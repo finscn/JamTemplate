@@ -1,0 +1,30 @@
+
+#container {
+	border : 1px solid black;
+}
+#main-menu #title {
+	font-size : 36px;
+	font-weight : bolder;
+}
+#main-menu, #game-over {
+	position: absolute;
+	z-index : 1000;
+	text-align: center;
+	background-color: rgba(220,220,220,0.7);
+	color: black;
+	border : 2px solid rgba(50,50,50,0.7);
+	border-radius: 20px;
+	font-size:23px;
+	padding : 20px;
+	margin-left : 50%;
+	width : 450px;
+	left : -225px;
+	top : 40px;
+}
+#main-menu a, #game-over a {
+	color: black;
+	margin-top: 20px;
+	height : 20px;
+	display: block;
+	padding : 10px;
+}
