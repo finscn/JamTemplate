@@ -26,10 +26,26 @@ Scene.prototype={
 
 	update: function(timeStep) {
 		var player=this.player;
-
 		player.update(timeStep);
-		this.blocks.forEach(function(block){
-			blockByRect(player.aabb, player, block.aabb);
+		var delta;
+		var aabb=player.aabb,
+			dx=player.deltaX,
+			dy=player.deltaY;
+		this.blocks.forEach(function(block,idx){
+			if (block.moveable){
+				delta=moveRect(aabb, dx, dy, block.aabb);
+				if (delta){
+					block.x+=delta[0];
+					block.y+=delta[1];
+					block.updateAABB();
+				}
+			}else{
+				delta=blockByRect(aabb, dx, dy, block.aabb);
+				if (delta){
+					player.deltaX=delta[0];
+					player.deltaY=delta[1];
+				}
+			}
 		});
 		player.updatePosition();
 		

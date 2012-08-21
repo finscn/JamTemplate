@@ -7,8 +7,9 @@ function createBlocks(scene){
 	];
 	var blocks=[];
 
-	datas.forEach(function(data){
+	datas.forEach(function(data,idx){
 		var block=new Block({
+			moveable : idx==1,
 			x : data[0],
 			y : data[1],
 			width : data[2],
@@ -26,10 +27,13 @@ function Block(cfg){
 }
 
 Block.prototype={
+	deltaX : 0,
+	deltaY : 0,
 	init : function(){
 		this.aabb=[];
 		this.updateAABB();
 	},
+
 	updateAABB : function(){
 		this.aabb[0] = this.x;
 		this.aabb[1] = this.y;
@@ -37,7 +41,13 @@ Block.prototype={
 		this.aabb[3] = this.y+this.height;
 	},
 	render : function(context){
+		if (this.moveable){
+			context.strokeStyle="#0000ee";
+		}else{
+			context.strokeStyle="#000";
+		}
 		context.strokeRect(this.x,this.y,this.width,this.height);
+
 	}
 };
 
