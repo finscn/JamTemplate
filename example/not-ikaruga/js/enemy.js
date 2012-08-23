@@ -9,11 +9,11 @@ function createEnemies(scene){
 		});
 		enemy.init(scene);
 		if (i%2){
-			enemy.x=[enemy.minX,enemy.maxX][getRandom(0,1)];
-			enemy.y=getRandom(enemy.minY,enemy.maxY);
+			enemy.x=[enemy.minX,enemy.maxX][randomInt(0,1)];
+			enemy.y=randomInt(enemy.minY,enemy.maxY);
 		}else{
-			enemy.x=getRandom(enemy.minX,enemy.maxX);
-			enemy.y=[enemy.minY,enemy.maxY][getRandom(0,1)];
+			enemy.x=randomInt(enemy.minX,enemy.maxX);
+			enemy.y=[enemy.minY,enemy.maxY][randomInt(0,1)];
 		}
 		enemies.push(enemy);
 	}
@@ -41,8 +41,8 @@ Enemy.prototype={
 	},
 
 	resetDefaultVel : function(){
-		this.defaultVelX = getRandom(3,9)/100;
-		this.defaultVelY = getRandom(3,9)/100;
+		this.defaultVelX = randomInt(3,9)/100;
+		this.defaultVelY = randomInt(3,9)/100;
 	},
 
 	update : function(timeStep){
@@ -65,7 +65,7 @@ Enemy.prototype={
 			change=true;
 		}
 		if (change){
-			this.color=[-1,1][getRandom(0,1)];
+			this.color=[-1,1][randomInt(0,1)];
 			this.resetDefaultVel();
 		}
 	},

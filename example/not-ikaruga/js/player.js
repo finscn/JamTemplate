@@ -2,7 +2,7 @@ function createPlayer(scene){
 	var player=new Player({
 		radius : 15,
 		defaultVel : 0.3,
-		color : [-1,1][ getRandom(0,1)],
+		color : [-1,1][ randomInt(0,1)],
 		lockingChangeColor : false 
 	});
 

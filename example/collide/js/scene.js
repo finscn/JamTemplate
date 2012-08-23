@@ -17,20 +17,20 @@ Scene.prototype={
 	init: function(game) {
 		this.game=game;
 		
-		this.rects=createRects(this);
+		this.polys=createPolys(this);
 						
 	},
 
 	update: function(timeStep) {
-		this.rects.forEach(function(rect){
-			rect.update(timeStep);
+		this.polys.forEach(function(poly){
+			poly.update(timeStep);
 		});
-		checkEntitiesCollide(this.rects,50, Math.ceil(this.game.viewWidth/50) );
+		checkEntitiesCollide(this.polys,64, 20 );
 	},
 
 	render: function(context, timeStep) {
-		this.rects.forEach(function(rect){
-			rect.render(context,timeStep)
+		this.polys.forEach(function(poly){
+			poly.render(context,timeStep)
 		});
 	}
 };
