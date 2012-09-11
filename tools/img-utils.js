@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var gm = require('gm');
 var mkdirp = require('mkdirp');
+var yaml = require('js-yaml');
 
 
 exports.join=join;
@@ -68,7 +69,7 @@ function join(frameList,outputPath , cb) {
 	fs.closeSync(fd);
 		
 	updateFrameSize(frameList,function(){
-		initConfig(frameList,ltr);
+		// initConfig(frameList,ltr);
 		joinFiles(listFile,outputPath,ltr,cb)
 	})
 }
@@ -105,10 +106,10 @@ function joinFiles(listFile,outputPath,ltr,cb){
 	gm("@"+listFile).append(ltr)
 		.write( output , function(err) {
 			if (err) {
-				console.log(err);
+				console.log(listFile,err);
 			}else if(cb){
-				cb();
 				fs.unlinkSync(listFile);
+				cb();
 			}
 		});
 }
@@ -136,7 +137,6 @@ function readFileSize(imgPath,frame,cb){
 		}else{
 			frame.w=value.width;
 			frame.h=value.height;
-			console.log(value)
 		}
 		if (cb){
 			cb();
@@ -145,46 +145,6 @@ function readFileSize(imgPath,frame,cb){
 
 }
 
-
-// var root="./test/";
-
-// function test(){
-
-// 	var frameList=[];
-// 	var idx=0;
-// 	for (var r=0;r<2;r++){
-// 		for (var c=0;c<5;c++){
-// 			var frame={
-// 				sourcePath : root+'run-sheet.png',
-// 				imgPath : "./test/run_"+idx+".png",
-// 				x : 307*c,
-// 				y : 211*r,
-// 				w : 307,
-// 				h : 211
-// 			}
-// 			frameList.push(frame);
-// 			idx++;
-// 		}
-// 	}
-// 	console.log("frame : "+idx);
-
-// 	split(frameList, function(){
-
-// 		console.log("split over");
-// 		frameList.forEach(function(frame){
-// 			frame.w=frame.h=0;
-// 		})
-
-
-// 		join(frameList, root+"run-sheet-output.png", function(){
-// 			console.log("join over")
-// 		})
-// 	})
-
-
-// }
-
-// test();
 
 
 
