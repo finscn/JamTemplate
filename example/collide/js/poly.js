@@ -54,6 +54,7 @@ function randomPoly(x,y,minR,maxR,minSide,maxSide){
 
 function Poly(cfg){
 	EntityTemplate.movable(this);
+	EntityTemplate.collidable(this);
 	merger(this,cfg);
 }
 
@@ -69,11 +70,22 @@ Poly.prototype={
 		this.cx=0-this.aabb[0];
 		this.cy=0-this.aabb[1];
 
+		this.minX=0;
+		this.minY=0;
 		this.maxX=scene.game.viewWidth;
 		this.maxY=scene.game.viewHeight;
 		this.velX=this.defaultVelX;
 		this.velY=this.defaultVelY;
 
+		this.initHitBox();
+
+	},
+	initHitBox : function(){
+		this.hitBox=[];
+		this.hitBox[0]=this.aabb[0]
+		this.hitBox[1]=this.aabb[1]
+		this.hitBox[2]=this.aabb[2]
+		this.hitBox[3]=this.aabb[3]
 	},
 	translate : function(x,y){
 		for (var i=0;i<this.vertexeCount;i++){
@@ -81,17 +93,12 @@ Poly.prototype={
 			v[0]+=x;
 			v[1]+=y;
 		}
-		this.aabb[0] += x;
-		this.aabb[1] += y;
-		this.aabb[2] += x;
-		this.aabb[3] += y;
+		
 	},
 
-	getAABB : function(){
-		return this.aabb;
-	},
+
 	isCollidedWith : function(otherPoly){
-		// var a=checkAABBCollide(this.getAABB(),otherPoly.getAABB());
+		// var a=checkAABBCollide(this.getHitBox(),otherPoly.getHitBox());
 		var a=checkPolyCollide(this.vertexes,otherPoly.vertexes);
 		return a;
 	},
@@ -116,6 +123,7 @@ Poly.prototype={
 		}else if (this.y==this.maxY){
 			this.velY=-this.defaultVelY;
 		}
+		this.updateHitBox();
 	},
 	render : function(context){
 		var vertexes=this.vertexes;

@@ -19,31 +19,31 @@ body {
     -webkit-box-orient: horizontal;
     -webkit-box-pack: center;
     -webkit-box-orient: horizontal;
-    -webkit-box-align: center;
+    -webkit-box-align: top;
  
      display:-moz-box;
     -moz-box-orient: horizontal;
     -moz-box-pack: center;
     -moz-box-orient: horizontal;
-    -moz-box-align: center;
+    -moz-box-align: top;
 
     display:-ms-box;
     -ms-box-orient: horizontal;
     -ms-box-pack: center;
     -ms-box-orient: horizontal;
-    -ms-box-align: center;
+    -ms-box-align: top;
 
     display:-o-box;
     -o-box-orient: horizontal;
     -o-box-pack: center;
     -o-box-orient: horizontal;
-    -o-box-align: center;
+    -o-box-align: top;
 
     display:box;
     box-orient: horizontal;
     box-pack: center;
     box-orient: horizontal;
-    box-align: center;
+    box-align: top;
 
 }
 
@@ -72,7 +72,8 @@ canvas {
 }
 
 .game-container {
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif, "雅黑", "黑体", "宋体" ;
+    /*'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', STHeiti;*/
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif, "Microsoft Yahei", STHeiti, "雅黑", "黑体", "宋体" ;
     position : relative;
     overflow : hidden;
 }

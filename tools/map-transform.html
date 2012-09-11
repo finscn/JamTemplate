@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache" >
+<meta http-equiv="Expires" content="-1" >
+<meta http-equiv="Cache-Control" content="no-cache" >
+<title>Tools of Vis</title>
+
+<meta name="apple-touch-fullscreen" content="yes" >
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+<script>
+function $id(id){
+	return document.getElementById(id)
+}
+
+function init(){
+	
+
+}
+function transform(){
+	var inPut=$id("in-put");
+	var mapData=$id("map-data");
+	var xml=inPut.value;
+	xml=xml.replace(/\/>/igm,"></object>");
+	mapData.innerHTML=xml;
+
+	var all=[];
+
+	var groups=mapData.getElementsByTagName("objectgroup");
+	
+	for (var i=0;i<groups.length;i++){
+		var group=groups[i];
+		var name=group.getAttribute("name");
+
+		var output=$id("out-put-"+name);
+		if (!output){
+			// continue;
+			output=createTextarea("out-put-"+name);
+		}
+
+		var objects=group.getElementsByTagName("object");
+		objects=Array.prototype.slice.call(objects,0);
+		var objs=_transform(objects);
+		var code=[];
+		objs.forEach(function(c){
+			code.push( JSON.stringify( c ) );
+
+		})
+		var str=code.join(" , \n");
+		// $id("out-put").innerHTML=str;
+		str= "[ \n "+str+" \n ]"
+		all.push(
+			"var "+name+"Data = "+str +" ;"
+		)
+		output.value=str;
+	}
+
+	var layers=mapData.getElementsByTagName("layer");
+	for (var i=0;i<layers.length;i++){
+		var layer=layers[i];
+		var name=layer.getAttribute("name");
+		
+		var data=layer.getElementsByTagName("data")[0];
+
+		var output=$id("out-put-"+name);
+		if (!output){
+			// continue;
+			output=createTextarea("out-put-"+name);
+		}
+		str=data.innerHTML;
+		str= "[ "+str+" ]"
+		output.value=str;
+		all.push(
+			"var "+name+"Data = "+str +" ;"
+		)
+
+	}
+
+	$id("out-put-all").value= all.join("\n") ;
+	return all.join("\n");
+
+}
+
+var scale=Math.SQRT2;
+
+function _transform(objects){
+	var objs=[];
+	var IDSEED=1;
+
+	objects.forEach(function(objDom,idx){
+		var obj=parseObject(objDom);
+
+		objs.push(obj);
+
+	})
+	
+	return objs;
+
+}
+
+function createTextarea(name){
+	var textarea=document.createElement("textarea");
+	textarea.style.width="500px";
+	textarea.style.height="120px";
+	textarea.style.display="block";
+	textarea.style.marginBottom="15px";
+	textarea.id=name;
+	textarea.name=name;
+	var text=document.createTextNode(name+" : ");
+	var br=document.createElement("br");
+
+	$id("output-area").appendChild(text);
+	$id("output-area").appendChild(textarea);
+	return textarea;
+}
+
+function parsetAttribute(object,objDom,name,newName){
+	var value=objDom.getAttribute(name);
+	if (value!==null && value!==undefined && value!==""){
+		var n=Number(value);
+		if (!isNaN(n)){
+			value=n;
+		}else{
+			var s=value.toLowerCase();
+			if (s==="true"){
+				value=true
+			}else if(s==="false"){
+				value=false
+			}
+		}
+		object[newName||name]=value;
+	}
+}
+
+function parseObject(objDom){
+	var object={};
+	parsetAttribute(object,objDom,"x");
+	parsetAttribute(object,objDom,"y");
+	parsetAttribute(object,objDom,"width","w");
+	parsetAttribute(object,objDom,"height","h");
+	parsetAttribute(object,objDom,"name");
+	parsetAttribute(object,objDom,"type");
+
+	
+
+	var propertiesDom=objDom.getElementsByTagName("properties")[0];
+	if (propertiesDom){
+		console.log(123)
+		var properties=parseProperties(propertiesDom);
+		for (var key in properties){
+			object[key]=properties[key];
+		}
+	}
+	return object;
+}
+
+function parseProperties(propertiesDom){
+	var properties={};
+	var propertyDomList=propertiesDom.getElementsByTagName("property");
+	for (var i=0;i<propertyDomList.length;i++){
+		var propertyDom=propertyDomList[i];
+		var name=propertyDom.getAttribute("name");
+
+		parsetAttribute(properties,propertyDom,"value",name)
+		
+	}
+	return properties;
+}
+
+
+
+</script>
+
+</head>
+<body onload="init()">
+<textarea id="in-put" style="width:500px;height:50px"></textarea>
+<input type="button" value="run" onclick="transform()"><br>
+all<br>
+<textarea id="out-put-all" style="width:500px;height:100px"></textarea><br>
+<div id="output-area">
+
+</div>
+
+
+
+<div style="display:none" id="map-data">
+
+</div>
+
+</body>
+
+</html>
+
+
+

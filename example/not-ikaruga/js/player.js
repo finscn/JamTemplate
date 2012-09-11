@@ -18,6 +18,8 @@ Player.prototype={
 
 	init : function(scene){
 		this.radiusSq=this.radius*this.radius;
+		this.minX=0;
+		this.minY=0;
 		this.maxX=scene.game.viewWidth;
 		this.maxY=scene.game.viewHeight;
 		this.x=(this.minX+this.maxX)/2;

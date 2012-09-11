@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+<title>Test Viewport</title>
+
+<!-- <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1, target-densitydpi=device-dpi">
+ -->
+
+<script>
+
+function setViewportScale(scale,scalable){
+	scale=scale||1; // ?  1/window.devicePixelRatio ;
+
+	var meta=document.createElement("meta");
+	meta.setAttribute("name","viewport");
+	var content=[
+		"width=device-width", 
+		"height=device-height",
+		"user-scalable="+(scalable?"yes":"no"),
+		"minimum-scale="+scale/(scalable?2:1), 
+		"maximum-scale="+scale*(scalable?2:1),
+		"initial-scale="+scale,
+		"target-densitydpi=device-dpi"
+	];
+	meta.setAttribute("content", content.join(", "));
+	document.head.appendChild(meta);
+}
+function showWindowSize(){
+	var bodyBounding=document.body.getBoundingClientRect();
+	var size=[
+		["inner",window.innerWidth, window.innerHeight],
+		["screen",window.screen.width, window.screen.height],
+		["avail",window.screen.availWidth, window.screen.availHeight],
+		["client",document.body.clientWidth, document.body.clientHeight],
+		["offset",document.body.offsetWidth, document.body.offsetHeight],
+		["scroll",document.body.scrollWidth, document.body.scrollHeight],
+		["Bounding",bodyBounding.width, bodyBounding.height]
+	]
+	return size;
+}
+
+var info;
+var infoList=[];
+window.onload=function(){
+	info=document.getElementById('info');
+	infoList.push( window.devicePixelRatio );
+
+	infoList=infoList.concat( showWindowSize() );
+	info.innerHTML=infoList.join("<br>");
+
+	var ratio=window.devicePixelRatio||1;
+
+	setViewportScale(1/ratio );
+}
+
+</script>
+<style type="text/css">
+
+html,body {
+	padding : 0px;
+	margin : 0px;
+	border : 0px;
+}
+
+#container {
+	position: relative;
+	width : 480px;
+	height : 768px;
+	background-color: rgba(255,0,0,0.5);
+}
+#container div{
+	position: absolute;
+	font-size:30px;
+}
+#c1 {
+
+}
+#c2 {
+	right : 0px;
+}
+#c3 {
+	right : 0px;
+	bottom:0px;
+}
+#c4 {
+	bottom:0px;
+}
+#info {
+	left : 20px;
+	top:100px;
+	border : 1px solid black;
+}
+</style>
+</head>
+
+<body >
+
+
+<div id="container" >
+<div id="c1">1</div>
+<div id="c2">2</div>
+<div id="c3">3</div>
+<div id="c4">4</div>
+<div id="info"></div>
+</div>
+
+
+
+</body>
+
+</html>
+
+

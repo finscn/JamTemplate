@@ -30,7 +30,7 @@ Scene.prototype={
 	update: function(timeStep) {
 		var player=this.player;
 		if (player.dead){
-			cleanKetState();
+			cleanKeyState();
 			this.paused=true;
 			this.game.showUI("game-over");
 			$id("scroe").innerHTML=(player.gametime/1000).toFixed(2);

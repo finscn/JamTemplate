@@ -12,6 +12,7 @@ function createPlayer(scene){
 
 function Player(cfg){
 	EntityTemplate.movable(this);
+	EntityTemplate.collidable(this);
 	merger(this,cfg);
 }
 
