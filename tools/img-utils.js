@@ -1,5 +1,5 @@
 var fs = require('fs');
-var path = require('path');
+var Path = require('path');
 var gm = require('gm');
 var mkdirp = require('mkdirp');
 var yaml = require('js-yaml');
@@ -37,7 +37,7 @@ function split(frameList, cb) {
 
 function createFrameImg(frame ,cb) {
 	var output=frame.imgPath;
-	var dir=path.dirname(output);
+	var dir=Path.dirname(output);
 	if ( !fs.existsSync(dir) ){
 		mkdirp.sync(dir)
 	}
@@ -46,15 +46,14 @@ function createFrameImg(frame ,cb) {
 		.write( output , function(err) {
 			if (err) {
 				console.log(frame.name ,err);
-			}else if(cb){
-				cb();
+			}
+			if(cb){
+				cb(err);
 			}
 		})
 }
 
-function join(frameList,outputPath , cb) {
-
-	var ltr=true;
+function join(frameList,outputPath , ltr,cb) {
 
 	var fileList=[];
 	frameList.forEach(function(frame,idx){
@@ -69,36 +68,16 @@ function join(frameList,outputPath , cb) {
 	fs.closeSync(fd);
 		
 	updateFrameSize(frameList,function(){
-		// initConfig(frameList,ltr);
 		joinFiles(listFile,outputPath,ltr,cb)
 	})
 }
 
-function initConfig(frameList,ltr){
-	var config=[];
-	var lastX=0, lastY=0;
 
-	frameList.forEach(function(frame,idx){
-		config.push( {
-			img : frame.imgPath,
-			x : lastX,
-			y : lastY,
-			w : frame.w,
-			h : frame.h
-		})
-		if (ltr){
-			lastX+=frame.w;
-		}else{
-			lastY+=frame.h;
-		}
-	})
-	console.log(config);
-}
 
 function joinFiles(listFile,outputPath,ltr,cb){
 
 	var output=outputPath;
-	var dir=path.dirname(output);
+	var dir=Path.dirname(output);
 	if ( !fs.existsSync(dir) ){
 		mkdirp.sync(dir)
 	}
@@ -107,9 +86,10 @@ function joinFiles(listFile,outputPath,ltr,cb){
 		.write( output , function(err) {
 			if (err) {
 				console.log(listFile,err);
-			}else if(cb){
+			}
+			if(cb){
 				fs.unlinkSync(listFile);
-				cb();
+				cb(err);
 			}
 		});
 }
