@@ -23,16 +23,16 @@ function createEmptyFrame(){
 
 function split(frameList, cb) {
 	var idx=-1;
-	function _parseFrame(){
+	function _go_on(){
 		idx++;
 		if (idx<frameList.length){
 			var frame=frameList[idx];
-			createFrameImg( frame, _parseFrame);
+			createFrameImg( frame, _go_on);
 		}else if(cb){
 			cb();
 		}
 	}
-	_parseFrame();
+	_go_on();
 }
 
 function createFrameImg(frame ,cb) {
@@ -97,16 +97,16 @@ function joinFiles(listFile,outputPath,ltr,cb){
 
 function updateFrameSize(frameList, cb) {
 	var idx=-1;
-	function _parseFrame(){
+	function _go_on(){
 		idx++;
 		if (idx<frameList.length){
 			var frame=frameList[idx];
-			readFileSize( frame.imgPath,frame, _parseFrame);
+			readFileSize( frame.imgPath,frame, _go_on);
 		}else if(cb){
 			cb();
 		}
 	}
-	_parseFrame();
+	_go_on();
 }
 
 function readFileSize(imgPath,frame,cb){
